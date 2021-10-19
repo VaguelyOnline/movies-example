@@ -14,4 +14,4 @@ php artisan db:seed
 php artisan serve
 ```
 
-Navigate to 
+Navigate to: http://localhost:8000/movies
