@@ -1,0 +1,2 @@
+[18-Oct-2021 08:27:51 UTC] PHP Warning:  require(C:\code\alacrity2021\movies-app/vendor/autoload.php): failed to open stream: No such file or directory in C:\code\alacrity2021\movies-app\artisan on line 18
+[18-Oct-2021 08:27:51 UTC] PHP Fatal error:  require(): Failed opening required 'C:\code\alacrity2021\movies-app/vendor/autoload.php' (include_path='.;C:\php\pear') in C:\code\alacrity2021\movies-app\artisan on line 18
