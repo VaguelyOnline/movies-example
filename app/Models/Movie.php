@@ -12,6 +12,15 @@ class Movie extends Model
     protected $fillable = [
         'name',
         'image',
-        'description'
+        'description',
+        'director_id'
     ];
+
+    public function actors() {
+        return $this->belongsToMany(Actor::class);
+    }
+
+    public function director() {
+        return $this->belongsTo(Director::class);
+    }
 }

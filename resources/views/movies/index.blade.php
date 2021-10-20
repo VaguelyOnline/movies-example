@@ -8,10 +8,8 @@
 
     <div class="row">
 
-        @if($movies->hasPages())
-            {{ $movies->links() }}
-        @endif
-        
+        {{ $movies->links() }}
+
         @foreach ($movies as $movie)
             <div class="col-4">
                 @include('components.movies.summary')
