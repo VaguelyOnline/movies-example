@@ -1,7 +1,3 @@
-.card.summary {
-    margin-bottom: 30px;
-}
-
-.summary img {
-    height: 100px;
-}
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
