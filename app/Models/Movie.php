@@ -13,7 +13,8 @@ class Movie extends Model
         'name',
         'image',
         'description',
-        'director_id'
+        'director_id',
+        'user_id'
     ];
 
     public function actors() {

@@ -4,9 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:destroy,movie')->only([
+            'destroy'
+        ]);
+
+        $this->middleware('can:create,' . Movie::class)->only([
+            'create',
+            'store'
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +38,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
+        return 'This shows the create form';
     }
 
     /**
@@ -54,6 +67,7 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
+
         // return $movie->actors()->where('name', 'like', '%R%')->get();
         // return $movie->actors()->count();
         // return $movie->actors()->get(); 
@@ -94,8 +108,9 @@ class MovieController extends Controller
      * @param  \App\Models\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movie $movie)
+    public function destroy(Request $request, Movie $movie)
     {
-        //
+        $movie->delete();
+        return redirect()->route('movies.index')->with('message', 'Movie deleted');
     }
 }

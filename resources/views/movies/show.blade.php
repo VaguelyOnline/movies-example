@@ -6,6 +6,14 @@
         {{ $movie->name }}
     </h1>
 
+    @can('destroy', $movie)
+        <form action="{{ route('movies.destroy', $movie) }}" method="POST">
+            @method('DELETE')
+            @csrf
+            <button class="btn btn-danger">Delete movie</button>
+        </form>
+    @endcan
+
     <h2>
         Directed by: {{ $movie->director->name }}, 
         who has directed {{ $movie->director->movies()->count() }} movies.
