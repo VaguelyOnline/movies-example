@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMovieRequest;
+use App\Models\Director;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,9 +38,10 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return 'This shows the create form';
+        $directors = Director::orderBy('name', 'asc')->get();
+        return view('movies.create', compact('directors'));
     }
 
     /**
@@ -47,16 +50,10 @@ class MovieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMovieRequest $request)
     {
-        // imagine that we have the data for a movie - name, image, description
-        $validated = $request->validate([
-            'name' => 'required|max:1000',
-            'description' => 'required',
-            'image' => 'required|url'
-        ]);
-
-        Movie::create($validated);
+        $movie = Auth::user()->movies()->create($request->validated());
+        return redirect()->route('movies.show', $movie);
     }
 
     /**

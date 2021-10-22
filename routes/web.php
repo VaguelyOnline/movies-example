@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('admin')->group(function () {
+    
+    Route::get('club', function () {
+        return 'admin club info';
+    });
+    
+});
+
 Route::resource('movies', MovieController::class);
 
 Route::get('/', function () {

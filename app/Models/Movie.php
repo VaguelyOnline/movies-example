@@ -24,4 +24,8 @@ class Movie extends Model
     public function director() {
         return $this->belongsTo(Director::class);
     }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

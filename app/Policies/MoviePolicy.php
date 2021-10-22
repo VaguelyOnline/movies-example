@@ -21,7 +21,7 @@ class MoviePolicy
     }
 
     public function create(User $user) {
-        return $user->id == 4;
+        return $user->id == 1;
     }
 
     /**
