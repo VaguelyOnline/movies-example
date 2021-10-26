@@ -25,7 +25,7 @@ Route::prefix('admin')->group(function () {
 Route::resource('movies', MovieController::class);
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.vue-example');
 });
 
 Route::get('/dashboard', function () {

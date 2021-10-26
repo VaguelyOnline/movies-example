@@ -1,0 +1,33 @@
+<html>
+    <body>
+        <div id='app'>
+            <h2>Count is: {{ count }}</h2>
+
+            <input type="text" v-model="message">
+            <button @click="inc">Increment</button>
+            <h1 v-for="n in count">{{ message }} {{ n }}</h1>
+        </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script>
+            let myVueApp = new Vue({
+                el: '#app',
+                data() {
+                    return {
+                        message: 'Hello, World #2',
+                        count: 1
+                    };
+                },
+                methods: {
+                    inc() {
+                        this.count++;
+                    },
+                    doSomething() {
+                        this.inc();
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
