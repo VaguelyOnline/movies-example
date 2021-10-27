@@ -22,7 +22,9 @@ Route::prefix('admin')->group(function () {
     
 });
 
-Route::resource('movies', MovieController::class);
+Route::resource('movies', MovieController::class)->except([
+    'update'
+]);
 
 Route::get('/', function () {
     return view('layouts.vue-example');
