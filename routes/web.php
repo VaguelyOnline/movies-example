@@ -14,14 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('admin')->group(function () {
-    
-    Route::get('club', function () {
-        return 'admin club info';
-    });
-    
-});
-
 Route::resource('movies', MovieController::class)->except([
     'update'
 ]);
@@ -30,8 +22,5 @@ Route::get('/', function () {
     return view('layouts.vue-example');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
