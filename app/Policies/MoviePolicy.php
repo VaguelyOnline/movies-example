@@ -24,6 +24,10 @@ class MoviePolicy
         return $user->id == 1;
     }
 
+    public function update(User $user, Movie $movie) {
+        return $movie->user_id == $user->id;
+    }
+
     /**
      * @return bool true if the user may view the given movie
      */

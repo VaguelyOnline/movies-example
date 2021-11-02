@@ -8,6 +8,7 @@ use App\Models\Director;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
@@ -20,6 +21,10 @@ class MovieController extends Controller
         $this->middleware('can:create,' . Movie::class)->only([
             'create',
             'store'
+        ]);
+
+        $this->middleware('can:update,movie')->only([
+            'update'
         ]);
     }
 
@@ -72,8 +77,6 @@ class MovieController extends Controller
         // return $movie->actors;
 
         $movie->load('actors.movies');
-
-
         return view('movies.show', compact('movie'));
     }
 
