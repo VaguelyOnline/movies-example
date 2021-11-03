@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ActorResource;
 use App\Models\Actor;
 use Illuminate\Http\Request;
 
@@ -81,5 +82,19 @@ class ActorController extends Controller
     public function destroy(Actor $actor)
     {
         //
+    }
+
+    public function getActors(Request $request)
+    {
+        $params = $request->validate([
+            'search' => 'required|min:1'
+        ]);
+
+        $actors = Actor::where('name', 'like' , $params['search'] . '%')
+            ->orderBy('name')
+            ->limit(5)
+            ->get();
+
+        return ActorResource::collection($actors);
     }
 }

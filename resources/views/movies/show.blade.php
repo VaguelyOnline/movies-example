@@ -4,15 +4,21 @@
 
     <h1>
         {{ $movie->name }}
+
+        @can('update', $movie)
+            <a class="float-end btn btn-outline-secondary" href="{{ route('movies.edit', $movie) }}">Edit movie</a>
+        @endcan
     </h1>
 
     @can('destroy', $movie)
         <form action="{{ route('movies.destroy', $movie) }}" method="POST">
             @method('DELETE')
             @csrf
-            <button class="btn btn-danger">Delete movie</button>
+            <button class="btn btn-outline-danger">Delete movie</button>
         </form>
     @endcan
+
+    
 
     <h2>
         Directed by: {{ $movie->director->name }}, 

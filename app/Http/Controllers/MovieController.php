@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMovieRequest;
 use App\Http\Requests\UpdateMovieRequest;
+use App\Http\Resources\ActorResource;
+use App\Models\Actor;
 use App\Models\Director;
 use App\Models\Movie;
 use Illuminate\Http\Request;
@@ -25,6 +27,10 @@ class MovieController extends Controller
 
         $this->middleware('can:update,movie')->only([
             'update'
+        ]);
+
+        $this->middleware('can:view,movie')->only([
+            'getActors'
         ]);
     }
 
@@ -114,5 +120,15 @@ class MovieController extends Controller
     {
         $movie->delete();
         return redirect()->route('movies.index')->with('message', 'Movie deleted');
+    }
+
+    public function getActors(Request $request, Movie $movie)
+    {
+        return ActorResource::collection($movie->actors);
+    }
+
+    public function addActor(Movie $movie, Actor $actor)
+    {
+
     }
 }

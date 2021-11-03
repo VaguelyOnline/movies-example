@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActorController;
 use App\Http\Controllers\MovieController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,4 +21,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return Auth::user();
 });
 
-Route::put('/movies/{movie}', [MovieController::class, 'update'])->name('movies.update');
+Route::prefix('/movies/{movie}')->group(function () {
+    
+    Route::put('/', [MovieController::class, 'update'])->name('movies.update');
+
+    Route::get('/actors', [MovieController::class, 'getActors'])->name('movies.actors');
+
+    Route::post('/actors/{actor}', [MovieController::class, 'addActor'])->name('movies.actors.store');
+
+});
+
+Route::get('/actors', [ActorController::class, 'getActors'])->name('actors.search');
