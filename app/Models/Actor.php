@@ -28,11 +28,14 @@ class Actor extends Model
         return $numActors;
     }
 
-    public function getNumCostarsForMovie2() {
+    public function getNumCostarsForMovie2($movie) {
 
-        $id = 1;
-        return Cache::remember('costars', 20, function () use ($id) {
-            return Movie::find($id)->actors()->count();
+        $key = 'costars' . $this->id . ':' . $movie->id;
+
+        return Cache::remember($key, 20, function () use ($movie) {
+            return $this->movies()->find($movie->id)
+                ? $movie->actors()->where('actors.id', '!=', $this->id)->count()
+                : 0;
         });
     }
 }

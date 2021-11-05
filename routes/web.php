@@ -3,6 +3,7 @@
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\TinkerController;
 use App\Models\Actor;
+use App\Models\Movie;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,7 @@ Route::get('/', function () {
 });
 
 Route::get('cache-example', function () {
-    return Actor::first()->getNumCostarsForMovie2();
+    return Actor::find(2)->getNumCostarsForMovie2(Movie::find(21));
 });
 
 if (app()->environment('local'))
