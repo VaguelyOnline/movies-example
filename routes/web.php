@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MovieController;
+use App\Models\Actor;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,10 @@ Route::resource('movies', MovieController::class)->except([
 
 Route::get('/', function () {
     return view('layouts.vue-example');
+});
+
+Route::get('cache-example', function () {
+    return Actor::first()->getNumCostarsForMovie2();
 });
 
 
