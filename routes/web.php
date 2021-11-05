@@ -28,7 +28,7 @@ Route::get('cache-example', function () {
     return Actor::first()->getNumCostarsForMovie2();
 });
 
-if (app()->environment('localhost'))
+if (app()->environment('local'))
 {
     Route::get('tinker', [TinkerController::class, 'tinker'])->name('tinker');
 }
