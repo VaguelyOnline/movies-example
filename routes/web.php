@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\TinkerController;
 use App\Models\Actor;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +28,9 @@ Route::get('cache-example', function () {
     return Actor::first()->getNumCostarsForMovie2();
 });
 
+if (app()->environment('localhost'))
+{
+    Route::get('tinker', [TinkerController::class, 'tinker'])->name('tinker');
+}
 
 require __DIR__.'/auth.php';
