@@ -148,6 +148,7 @@
             methods: {
 
                 addActorToCast() {
+                    console.log(this.movie.id,);
                     let url = route('movies.actors.store', {
                         movie: this.movie.id,
                         actor: this.selectedActor.id
