@@ -20,9 +20,11 @@ class AddUserIdToMoviesTable extends Migration
         });
     
         $user = User::first();
-        Movie::query()->update([
-            'user_id' => $user->id
-        ]);
+
+        if (Movie::count())
+            Movie::query()->update([
+                'user_id' => $user->id
+            ]);
 
     }
 
