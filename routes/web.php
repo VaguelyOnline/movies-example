@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\MovieController;
+use App\Mail\MovieUpdated;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +22,7 @@ Route::resource('movies', MovieController::class)->except([
 ]);
 
 Route::get('/', function () {
-    return view('layouts.vue-example');
+    Mail::to(User::first())->send(new MovieUpdated());
 });
 
 
