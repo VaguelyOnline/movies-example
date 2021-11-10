@@ -46,4 +46,12 @@ class MovieSeeder extends Seeder
                 'description' => Str::random(500)
             ]);
     }
+
+    private function assignAllMoviesToUser() {
+        $movies = Movie::all();
+
+        foreach($movies as $movie) {
+            'user_id' => $movie
+        }
+    }
 }

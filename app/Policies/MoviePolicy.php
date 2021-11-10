@@ -26,6 +26,7 @@ class MoviePolicy
 
     public function update(User $user, Movie $movie) {
         return $movie->user_id == $user->id;
+        return $user->role == 'admin';
     }
 
     /**

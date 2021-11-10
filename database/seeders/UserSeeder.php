@@ -21,7 +21,9 @@ class UserSeeder extends Seeder
 
     private function createFirstUserRootAdmin()
     {
-        
+        User::create([
+
+        ]);
     }
 
     private function createSecondUserNoPermissions()

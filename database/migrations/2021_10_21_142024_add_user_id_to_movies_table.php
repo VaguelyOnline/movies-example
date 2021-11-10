@@ -19,7 +19,7 @@ class AddUserIdToMoviesTable extends Migration
             $table->foreignIdFor(User::class)->nullable(); // creator / registrator
         });
     
-        $user = User::first();
+        $user = User::find(1);
         Movie::query()->update([
             'user_id' => $user->id
         ]);
