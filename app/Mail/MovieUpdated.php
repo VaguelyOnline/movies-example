@@ -11,14 +11,18 @@ class MovieUpdated extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $movie;
+    public $user;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($movie, $user)
     {
-        //
+        $this->movie = $movie;
+        $this->user = $user;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MovieController;
 use App\Mail\MovieUpdated;
+use App\Models\Movie;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,11 @@ Route::resource('movies', MovieController::class)->except([
 ]);
 
 Route::get('/', function () {
-    Mail::to(User::first())->send(new MovieUpdated());
+    $user = User::first();
+    $movie = Movie::first();
+    $email = new MovieUpdated($movie, $user);
+    
+    Mail::to($user)->send($email);
 });
 
 

@@ -107,6 +107,7 @@ class MovieController extends Controller
     public function update(UpdateMovieRequest $request, Movie $movie)
     {
         $movie->update($request->validated());
+
         return $movie;
     }
 

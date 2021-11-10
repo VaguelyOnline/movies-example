@@ -6,8 +6,8 @@
         </h1>
 
         <p>
-            Hi [name], your movie [movie.name] was 
-            updated. <a href="???">Click for details</a>.
+            Hi {{ $user->name }}, your movie {{ $movie->name }} was 
+            updated. <a href="{{ route('movies.show', $movie) }}">Click for details</a>.
         </p>
     </body>
 

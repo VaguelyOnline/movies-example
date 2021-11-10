@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Mail\MovieUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Movie extends Model
 {
@@ -16,6 +18,15 @@ class Movie extends Model
         'director_id',
         'user_id'
     ];
+
+    protected static function booted()
+    {
+        static::updated(function ($movie) {
+
+            Mail::to($movie->user)->send(new MovieUpdated($movie, $movie->user));
+
+        });
+    }
 
     public function actors() {
         return $this->belongsToMany(Actor::class);
