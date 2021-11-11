@@ -50,8 +50,5 @@ class MovieSeeder extends Seeder
     private function assignAllMoviesToUser() {
         $movies = Movie::all();
 
-        foreach($movies as $movie) {
-            'user_id' => $movie
-        }
     }
 }

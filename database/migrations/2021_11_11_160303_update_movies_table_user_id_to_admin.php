@@ -1,22 +1,27 @@
 <?php
 
+use App\Models\Movie;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateUsersTableWithIsAdmin extends Migration
+class UpdateMoviesTableUserIdToAdmin extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
+
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_admin')->default("0");
-        });
-    
+        $movies = Movie::all();
+
+        foreach($movies as $movie) {
+            $movie->update([
+                'user_id' => '1',
+            ]);
+        }
     }
 
     /**

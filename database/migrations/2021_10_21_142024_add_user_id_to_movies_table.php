@@ -18,11 +18,6 @@ class AddUserIdToMoviesTable extends Migration
         Schema::table('movies', function (Blueprint $table) {
             $table->foreignIdFor(User::class)->nullable(); // creator / registrator
         });
-    
-        $user = User::find(1);
-        Movie::query()->update([
-            'user_id' => $user->id
-        ]);
 
     }
 
