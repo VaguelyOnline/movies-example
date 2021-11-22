@@ -153,6 +153,7 @@
                         movie: this.movie.id,
                         actor: this.selectedActor.id
                     });
+                    console.log(url);
 
                     window.axios.post(url).then(response => this.onActorAddedToCast(response))
                         .catch(error => console.log(error))
@@ -160,6 +161,12 @@
                 },
 
                 onActorAddedToCast(response) {
+
+                    if (response.data.message) {
+                        // if actor exists return and send alert
+                        return alert(response.data.message);
+                    }
+                    // reset modal
                     this.resetActorPickerModal();
                     this.actors.unshift(this.selectedActor);
 

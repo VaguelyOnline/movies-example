@@ -29,9 +29,9 @@ class MovieController extends Controller
             'update'
         ]);
 
-        $this->middleware('can:view,movie')->only([
-            'getActors'
-        ]);
+        // $this->middleware('can:view,movie')->only([
+        //     'getActors'
+        // ]);
     }
 
     /**
@@ -129,6 +129,10 @@ class MovieController extends Controller
 
     public function addActor(Movie $movie, Actor $actor)
     {
-
+        // Check if actor is in movie - if they are send error message!
+        if ($movie->actors->contains($actor)) return json_encode(array("message" => "This Actor already exists"));
+        
+        // Save actor to movie
+        $movie->actors()->save($actor);
     }
 }
