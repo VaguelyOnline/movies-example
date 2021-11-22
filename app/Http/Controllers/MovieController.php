@@ -79,7 +79,7 @@ class MovieController extends Controller
 
         // return $movie->actors()->where('name', 'like', '%R%')->get();
         // return $movie->actors()->count();
-        // return $movie->actors()->get(); 
+        // return $movie->actors()->get();
         // return $movie->actors;
 
         $movie->load('actors.movies');
