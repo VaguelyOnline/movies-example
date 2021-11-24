@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +23,6 @@ Route::get('/', function () {
     return view('layouts.vue-example');
 });
 
+Route::get('/game', [GameController::class, 'show'])->name('games.show');
 
 require __DIR__.'/auth.php';
