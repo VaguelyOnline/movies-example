@@ -161,10 +161,11 @@
                 },
 
                 onActorAddedToCast(response) {
+                    console.log(response)
 
-                    if (response.data.message) {
-                        // if actor exists return and send alert
-                        return alert(response.data.message);
+                    if (!response.data.message) {
+                        // if actor exists return
+                        return
                     }
                     // reset modal
                     this.resetActorPickerModal();

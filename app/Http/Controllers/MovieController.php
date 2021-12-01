@@ -29,9 +29,9 @@ class MovieController extends Controller
             'update'
         ]);
 
-        // $this->middleware('can:view,movie')->only([
-        //     'getActors'
-        // ]);
+        $this->middleware('can:view,movie')->only([
+            'getActors'
+        ]);
     }
 
     /**
@@ -122,17 +122,18 @@ class MovieController extends Controller
         return redirect()->route('movies.index')->with('message', 'Movie deleted');
     }
 
-    public function getActors(Request $request, Movie $movie)
+    public function getActors(Request $request, Movie $movie) 
     {
         return ActorResource::collection($movie->actors);
     }
 
     public function addActor(Movie $movie, Actor $actor)
     {
-        // Check if actor is in movie - if they are send error message!
-        if ($movie->actors->contains($actor)) return json_encode(array("message" => "This Actor already exists"));
+        // Check if actor is in movie, if they are do nothing
+        if ($movie->actors->contains($actor)) return;
         
         // Save actor to movie
         $movie->actors()->save($actor);
+        return ["message" => "Actor Added"];
     }
 }
