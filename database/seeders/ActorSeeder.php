@@ -17,7 +17,7 @@ class ActorSeeder extends Seeder
     public function run(Generator $faker)
     {
         // create 
-        for($i = 0; $i < 200; $i++)
+        for($i = 0; $i < 20; $i++)
             Actor::create([
                 'name' => $faker->name,
                 'dob' => now()->subYears(25),
