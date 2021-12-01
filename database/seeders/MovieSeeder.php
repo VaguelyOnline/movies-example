@@ -21,7 +21,7 @@ class MovieSeeder extends Seeder
 
     private function createLotsOfMovies()
     {
-        for($i=0; $i < 200; $i++)
+        for($i=0; $i < 20; $i++)
             Movie::create([
                 'name' => Str::random(20),
                 'image' => 'https://picsum.photos/600/400?random=1',
