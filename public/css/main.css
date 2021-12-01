@@ -3,5 +3,6 @@
 }
 
 .summary img {
-    height: 100px;
+    object-fit: cover;
+    height: 300px;
 }
