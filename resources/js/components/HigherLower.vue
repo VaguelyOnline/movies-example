@@ -1,13 +1,47 @@
 <template>
-    <h1>
-        Hi there from the High / Low game!
-    </h1>
+    <div>
+        <game-welcome
+            v-if="state == 'welcome'"
+            @play="onPlay" />
+
+        <higher-lower-game
+            :difficulty="difficulty"
+            v-if="state == 'game'" />
+
+        <game-over v-if="state == 'over'" />
+    </div>
 </template>
 
 <script>
+import GameWelcome from "./GameWelcome";
+import HigherLowerGame from "./HigherLowerGame";
+import GameOver from "./GameOver";
 export default {
 
-    name: 'HigherLower'
+    name: 'HigherLower',
+    components: {GameOver, HigherLowerGame, GameWelcome},
+    data() {
+        return {
+            state: '',
+            difficulty: null
+        };
+    },
+    mounted() {
+        this.setState('welcome');
+    },
+
+    methods: {
+        onPlay(difficulty) {
+            this.difficulty = difficulty;
+
+            // advance to the game - set the difficulty game
+            this.setState('game');
+        },
+
+        setState(newState) {
+            this.state = newState;
+        }
+    }
 
 }
 </script>
