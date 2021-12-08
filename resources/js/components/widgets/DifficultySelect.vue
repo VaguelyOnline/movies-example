@@ -1,8 +1,7 @@
 <template>
-
-    <div @click="select" class="card" :class="classes" >
+    <div @click="select" class="card" :class="classes">
         <div class="card-body">
-            <h5  class="card-title">{{ title }}</h5>
+            <h5 class="card-title">{{ title }}</h5>
             <p class="card-text">{{ description }}</p>
             <button class="btn btn-light btn-lg">Select</button>
         </div>
@@ -15,28 +14,28 @@ export default {
     props: {
         title: {
             required: true,
-            type: String
+            type: String,
         },
         description: {
             required: true,
-            type: String
+            type: String,
         },
         classes: {
             required: false,
-            type: Object
-        }
+            type: Object,
+        },
     },
 
     methods: {
         select() {
-            this.$emit('nathpanic');
-        }
-    }
-}
+            this.$emit("difficulty");
+        },
+    },
+};
 </script>
 
 <style scoped>
-    .card:hover {
-        cursor: pointer;
-    }
+.card:hover {
+    cursor: pointer;
+}
 </style>
