@@ -6,7 +6,7 @@
         <div class="row mt-5">
             <div class="col" v-for="difficulty in difficulties">
                 <difficulty-select
-                    @difficulty="selectDifficulty(difficulty)"
+                    @selected="selectDifficulty(difficulty)"
                     :classes="getClasses(difficulty)"
                     :title="difficulty.title"
                     :description="difficulty.description"

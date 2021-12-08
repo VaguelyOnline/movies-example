@@ -28,10 +28,10 @@ export default {
 
     methods: {
         select() {
-            this.$emit("difficulty");
-        },
-    },
-};
+            this.$emit('selected');
+        }
+    }
+}
 </script>
 
 <style scoped>
