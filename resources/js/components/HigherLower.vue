@@ -1,14 +1,19 @@
 <template>
     <div>
-        <game-welcome
-            v-if="state == 'welcome'"
-            @play="onPlay" />
+        <game-welcome v-if="state == 'welcome'" @play="onPlay" />
 
         <higher-lower-game
             :difficulty="difficulty"
-            v-if="state == 'game'" />
+            v-if="state == 'game'"
+            @gameOver="onGameOver"
+        />
 
-        <game-over v-if="state == 'over'" />
+        <game-over
+            :score="score"
+            v-if="state == 'over'"
+            @welcome="onWelcome"
+            @playAgain="onPlayAgain"
+        />
     </div>
 </template>
 
@@ -17,17 +22,17 @@ import GameWelcome from "./GameWelcome";
 import HigherLowerGame from "./HigherLowerGame";
 import GameOver from "./GameOver";
 export default {
-
-    name: 'HigherLower',
-    components: {GameOver, HigherLowerGame, GameWelcome},
+    name: "HigherLower",
+    components: { GameOver, HigherLowerGame, GameWelcome },
     data() {
         return {
-            state: '',
-            difficulty: null
+            state: "",
+            difficulty: null,
+            score: 0,
         };
     },
     mounted() {
-        this.setState('welcome');
+        this.setState("welcome");
     },
 
     methods: {
@@ -35,17 +40,28 @@ export default {
             this.difficulty = difficulty;
 
             // advance to the game - set the difficulty game
-            this.setState('game');
+            this.setState("game");
         },
 
         setState(newState) {
             this.state = newState;
-        }
-    }
+        },
 
-}
+        onGameOver(score) {
+            console.log(score);
+            this.score = score;
+            this.setState("over");
+        },
+
+        onWelcome() {
+            this.setState("welcome");
+        },
+
+        onPlayAgain() {
+            this.setState("game");
+        },
+    },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

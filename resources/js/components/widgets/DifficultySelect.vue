@@ -1,6 +1,5 @@
 <template>
-
-    <div @click="select" class="card" :class="classes" >
+    <div @click="select" class="card" :class="classes">
         <div class="card-body">
             <h5 class="card-title">{{ title }}</h5>
             <p class="card-text">{{ description }}</p>
@@ -19,12 +18,12 @@ export default {
         },
         description: {
             required: true,
-            type: String
+            type: String,
         },
         classes: {
             required: false,
-            type: Object
-        }
+            type: Object,
+        },
     },
 
     methods: {
@@ -36,7 +35,7 @@ export default {
 </script>
 
 <style scoped>
-    .card:hover {
-        cursor: pointer;
-    }
+.card:hover {
+    cursor: pointer;
+}
 </style>

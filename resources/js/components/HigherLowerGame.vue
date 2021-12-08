@@ -14,11 +14,12 @@ export default {
     props: {
         difficulty: {
             required: true,
-            type: Object
+            type: Object,
         }
     },
     data() {
         return {
+            score: 0,
             deck: [],
             shuffledDeck: [],
             playDeck: [],
@@ -87,11 +88,13 @@ export default {
 
         getPlayDeck(deck) {
             return deck.slice(0, this.difficulty.cards);
+        },
+
+        gameOver() {
+            this.$emit("gameOver", this.score);
         }
     }
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
