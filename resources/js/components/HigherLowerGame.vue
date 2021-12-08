@@ -86,7 +86,7 @@ export default {
         },
 
         getPlayDeck(deck) {
-            return deck.slice(0, this.difficulty.cards)
+            return deck.slice(0, this.difficulty.cards);
         }
     }
 }
