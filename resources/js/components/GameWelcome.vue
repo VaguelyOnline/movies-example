@@ -8,7 +8,7 @@
             <div class="col" v-for="difficulty in difficulties">
 
                 <difficulty-select
-                    @nathpanic="selectDifficulty(difficulty)"
+                    @selected="selectDifficulty(difficulty)"
                     :classes="getClasses(difficulty)"
                     :title="difficulty.title"
                     :description="difficulty.description"
