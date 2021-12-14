@@ -17,12 +17,18 @@
 <script>
 export default {
     name: "GameOver",
+    props: {
+        difficulty: {
+            required: true,
+            type: Object,
+        },
+    },
     data() {
         return {};
     },
     computed: {
         scoreIsGood() {
-            return this.score > 9000;
+            return this.score == this.difficulty.cards - 1;
         },
         completedMessage() {
             if (this.scoreIsGood) {
@@ -36,6 +42,10 @@ export default {
         score: {
             required: true,
             type: Number,
+        },
+        difficulty: {
+            required: true,
+            type: Object,
         },
     },
 
