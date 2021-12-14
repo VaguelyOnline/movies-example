@@ -4,6 +4,12 @@
             <div class="card-body" style="text-align: center">
                 <h5 class="card-title">Higher or Lower Game.</h5>
                 <p class="card-text">
+                    Difficulty: {{ difficulty.title }} ({{
+                        difficulty.cards
+                    }}
+                    Cards)
+                </p>
+                <p class="card-text">
                     Current card: {{ currentCard.value }} of
                     {{ currentCard.suit }}
                 </p>
