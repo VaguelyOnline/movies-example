@@ -2,14 +2,23 @@
     <div>
         You are playing the game on {{ difficulty.title }} mode ({{ difficulty.cards }} cards)
 
-        <li v-for="card in playDeck">
-            {{ card.value }} of {{ card.suit }}
+        <li>
+            score: {{ score }} , position: {{ position }}
         </li>
+
+        <button @click="higherButton()" class="btn btn-primary">higher</button>
+
+
+        <button @click="lowerButton()" class="btn btn-primary">Lower</button>
+
     </div>
 </template>
 
 <script>
-export default {
+import Button from "../../../vendor/laravel/breeze/stubs/inertia-vue/resources/js/Components/Button.vue"
+
+export default
+    components: { Button },t {
     name: "HigherLowerGame",
     props: {
         difficulty: {
@@ -34,8 +43,10 @@ export default {
     },
     computed: {
         currentCard() {
+            return this.playDeck[this.position];
         },
         nextCard() {
+            return this.playDeck[this.position + 1];
         }
     },
     mounted() {
@@ -90,8 +101,30 @@ export default {
             return deck.slice(0, this.difficulty.cards);
         },
 
+        selectButton(choice) {
+            this.selectedButton = choice;
+        },
+
         gameOver() {
             this.$emit("gameOver", this.score);
+        },
+
+        higherButton() {
+            if (this.currentCard > this.nextCard) {
+                this.score++,
+                this.position++,
+            } else {
+                this.gameOver;
+            }
+        },
+
+        lowerButton() {
+            if (this.currentCard < this.nextCard) {
+                this.score++,
+                this.position++,
+            } else {
+                this.gameOver;
+            }
         }
     }
 }
