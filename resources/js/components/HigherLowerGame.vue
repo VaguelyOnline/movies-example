@@ -2,23 +2,21 @@
     <div>
         You are playing the game on {{ difficulty.title }} mode ({{ difficulty.cards }} cards)
 
-        <li>
-            score: {{ score }} , position: {{ position }}
-        </li>
+        <p>current card is: <p>{{currentCard.value}} of {{currentCard.suit}}</p>
+        <p>next card is: {{ nextCard.value }}</p>
+        <p>score: {{ score }} , position: {{ position }}</p>
 
-        <button @click="higherButton()" class="btn btn-primary">higher</button>
+        <button @click="higherButton" class="btn btn-primary">higher</button>
 
-
-        <button @click="lowerButton()" class="btn btn-primary">Lower</button>
-
+        <button @click="lowerButton" class="btn btn-primary">Lower</button>
     </div>
 </template>
 
 <script>
 import Button from "../../../vendor/laravel/breeze/stubs/inertia-vue/resources/js/Components/Button.vue"
 
-export default
-    components: { Button },t {
+export default {
+    components: { Button },
     name: "HigherLowerGame",
     props: {
         difficulty: {
@@ -43,7 +41,11 @@ export default
     },
     computed: {
         currentCard() {
-            return this.playDeck[this.position];
+            if (this.endOfDeck()) {
+                this.gameOver();
+            } else {
+                return this.playDeck[this.position];
+            }
         },
         nextCard() {
             return this.playDeck[this.position + 1];
@@ -110,21 +112,25 @@ export default
         },
 
         higherButton() {
-            if (this.currentCard > this.nextCard) {
-                this.score++,
-                this.position++,
+            if (this.currentCard.value <= this.nextCard.value) {
+                this.score++;
+                this.position++;
             } else {
-                this.gameOver;
+                this.gameOver();
             }
         },
 
         lowerButton() {
-            if (this.currentCard < this.nextCard) {
-                this.score++,
-                this.position++,
+            if (this.currentCard.value >= this.nextCard.value) {
+                this.score++;
+                this.position++;
             } else {
-                this.gameOver;
+                this.gameOver();
             }
+        },
+
+        endOfDeck() {
+            return this.position == this.playDeck.length -1;
         }
     }
 }

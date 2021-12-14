@@ -22,7 +22,7 @@ export default {
     },
     computed: {
         scoreIsGood() {
-            return this.score > 9000;
+            return this.score == this.difficulty.cards -1;
         },
         completedMessage() {
             if (this.scoreIsGood) {
