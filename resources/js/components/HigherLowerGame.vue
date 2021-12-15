@@ -17,17 +17,13 @@
                     higher
                 </button>
 
-                <game-card :card="currentCard"></game-card>
+                <game-card v-if="currentCard" :card="currentCard"></game-card>
 
                 <button @click="lowerButton" class="btn btn-danger">
                     Lower
                 </button>
                 <br />
                 <br />
-                <!--
-                <button class="btn btn-primary" @click="gameOver">
-                    Game Over Demo
-                </button> -->
             </div>
         </div>
     </div>
@@ -37,7 +33,7 @@
 import GameCard from "./widgets/GameCard";
 export default {
     name: "HigherLowerGame",
-    components: {GameCard},
+    components: { GameCard },
     props: {
         difficulty: {
             required: true,
@@ -138,24 +134,18 @@ export default {
             if (this.currentCard.value < this.nextCard.value) {
                 this.position++;
                 this.score++;
-            } else if (this.currentCard.value > this.nextCard.value) {
-                this.checkScore();
             } else {
-                // If cards are the same value skip and don't give score
-                this.position++;
+                this.checkScore();
             }
         },
 
         lowerButton() {
             if (!this.nextCard) this.gameOver();
-            if (this.currentCard.value > this.nextCard.value) {
+            if (this.currentCard.value >= this.nextCard.value) {
                 this.position++;
                 this.score++;
-            } else if (this.currentCard.value < this.nextCard.value) {
-                this.checkScore();
             } else {
-                // If cards are the same value skip and don't give score
-                this.position++;
+                this.checkScore();
             }
         },
 
