@@ -38,7 +38,6 @@ export default {
     methods: {
         onPlay(difficulty) {
             this.difficulty = difficulty;
-
             // advance to the game - set the difficulty game
             this.setState("game");
         },

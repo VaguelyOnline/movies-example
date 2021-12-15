@@ -2,6 +2,24 @@
     <div>
         You are playing the game on {{ difficulty.title }} mode ({{ difficulty.cards }} cards)
 
+        <div class="row">
+            <div class="col">
+                <button @click="checkHigher" type="button" class="btn btn-outline-secondary">Higher</button>
+            </div> 
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <p>{{this.currentCard.value}} of {{this.currentCard.suit}}</p>
+            </div> 
+        </div>
+        
+        <div class="row">
+            <div class="col">
+                <button @click="checkLower" type="button" class="btn btn-outline-secondary">Lower</button>
+            </div> 
+        </div>
+
         <li v-for="card in playDeck">
             {{ card.value }} of {{ card.suit }}
         </li>
@@ -34,8 +52,10 @@ export default {
     },
     computed: {
         currentCard() {
+            return this.playDeck[this.position];
         },
         nextCard() {
+            return this.playDeck[this.position+1];
         }
     },
     mounted() {
@@ -92,7 +112,30 @@ export default {
 
         gameOver() {
             this.$emit("gameOver", this.score);
+        },
+
+        moveResolver(move){
+            if (move) {
+                this.postion+=1;
+                this.score+=1;
+            } else{
+                this.gameOver();
+            }
+        },
+
+        checkHigher() {
+            console.log(this.currentCard.value);
+            console.log(this.nextCard.value);
+            return this.moveResolver(this.currentCard.value < this.nextCard.value);
+        },
+
+        checkLower() {
+            console.log(this.currentCard.value);
+            console.log(this.nextCard.value);
+            return this.moveResolver(this.currentCard.value > this.nextCard.value);
         }
+
+
     }
 }
 </script>
