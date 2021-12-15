@@ -4,13 +4,19 @@
 
         <div class="row">
             <div class="col">
-                <button @click="checkHigher" type="button" class="btn btn-outline-secondary">Higher</button>
+                <p id="Score"> Score {{this.score}}</p>
             </div> 
         </div>
 
         <div class="row">
             <div class="col">
-                <p>{{this.currentCard.value}} of {{this.currentCard.suit}}</p>
+                <button @click="checkHigher" type="button" class="btn btn-outline-secondary">Higher</button>
+            </div> 
+        </div>
+        
+        <div class="row">
+            <div class="col">
+                <p id="CurrentCardText"> Current Card: {{this.currentCard.value}} of {{this.currentCard.suit}}</p>
             </div> 
         </div>
         
@@ -50,12 +56,19 @@ export default {
             position: 0
         }
     },
+
+    watch: {
+        position: function(val, oldVal) {
+            console.log("new: %s, old: %s", val, oldVal);
+        }
+    },
+
     computed: {
         currentCard() {
             return this.playDeck[this.position];
         },
         nextCard() {
-            return this.playDeck[this.position+1];
+            return this.playDeck[this.position +1];
         }
     },
     mounted() {
@@ -114,24 +127,29 @@ export default {
             this.$emit("gameOver", this.score);
         },
 
+        endOfDeck() {
+            return this.position == this.playDeck.length-1;
+        },
+
         moveResolver(move){
+
+            this.position+=1;
             if (move) {
-                this.postion+=1;
-                this.score+=1;
-            } else{
-                this.gameOver();
+                this.score+=100;
             }
+
+            if (this.endOfDeck()){
+                this.gameOver()
+            }
+            
+    
         },
 
         checkHigher() {
-            console.log(this.currentCard.value);
-            console.log(this.nextCard.value);
             return this.moveResolver(this.currentCard.value < this.nextCard.value);
         },
 
         checkLower() {
-            console.log(this.currentCard.value);
-            console.log(this.nextCard.value);
             return this.moveResolver(this.currentCard.value > this.nextCard.value);
         }
 
