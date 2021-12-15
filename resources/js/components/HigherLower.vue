@@ -9,6 +9,7 @@
         />
 
         <game-over
+            :difficulty="difficulty"
             :score="score"
             v-if="state == 'over'"
             @welcome="onWelcome"

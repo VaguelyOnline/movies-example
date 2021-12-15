@@ -1,21 +1,44 @@
 <template>
     <div>
-        You are playing the game on {{ difficulty.title }} mode ({{ difficulty.cards }} cards)
+        <div class="card">
+            <div class="card-title">
+                <h1>
+                    You are playing the game on {{ difficulty.title }} mode ({{
+                        difficulty.cards
+                    }}
+                    cards)
+                </h1>
+            </div>
+            <div class="card-body">
+                <h4>Card Count: {{ position }}</h4>
+                <h4>Score: {{ score }}</h4>
+                <h4>Lives: {{ lives }}</h4>
+                <button @click="higherButton" class="btn btn-success">
+                    higher
+                </button>
 
-        <li v-for="card in playDeck">
-            {{ card.value }} of {{ card.suit }}
-        </li>
+                <game-card v-if="currentCard" :card="currentCard"></game-card>
+
+                <button @click="lowerButton" class="btn btn-danger">
+                    Lower
+                </button>
+                <br />
+                <br />
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import GameCard from "./widgets/GameCard";
 export default {
     name: "HigherLowerGame",
+    components: { GameCard },
     props: {
         difficulty: {
             required: true,
             type: Object,
-        }
+        },
     },
     data() {
         return {
@@ -23,20 +46,31 @@ export default {
             deck: [],
             shuffledDeck: [],
             playDeck: [],
-            suits: [
-                'Hearts',
-                'Clubs',
-                'Diamonds',
-                'Spades'
-            ],
-            position: 0
-        }
+            suits: ["Hearts", "Clubs", "Diamonds", "Spades"],
+            position: 0,
+            lives: 3,
+        };
     },
     computed: {
         currentCard() {
+            return this.playDeck[this.position];
         },
+
         nextCard() {
-        }
+            let nextCard = this.playDeck[this.position + 1];
+            if (!nextCard) return false;
+            return nextCard;
+        },
+
+        // nextCard() {
+        //     return this.playDeck[this.position + 1];
+        // },
+
+        checkGameOver() {
+            if (this.position == this.difficulty.cards) {
+                this.gameOver();
+            }
+        },
     },
     mounted() {
         this.deck = this.buildDeck();
@@ -48,7 +82,9 @@ export default {
         buildDeck() {
             let cards = [];
 
-            this.suits.forEach(suit => cards = cards.concat(this.buildSuit(suit)));
+            this.suits.forEach(
+                (suit) => (cards = cards.concat(this.buildSuit(suit)))
+            );
 
             // this.suits.forEach(suit => {
             //     cards = cards.concat(this.buildSuit(suit));
@@ -69,8 +105,7 @@ export default {
         // build all the cards in a given suit
         buildSuit(suit) {
             let cards = [];
-            for(let i = 1; i < 14; i++)
-                cards.push(this.buildCard(suit, i));
+            for (let i = 1; i < 14; i++) cards.push(this.buildCard(suit, i));
 
             return cards;
         },
@@ -78,7 +113,7 @@ export default {
         buildCard(suit, value) {
             return {
                 suit: suit,
-                value: value
+                value: value,
             };
         },
 
@@ -92,9 +127,42 @@ export default {
 
         gameOver() {
             this.$emit("gameOver", this.score);
-        }
-    }
-}
+        },
+
+        higherButton() {
+            if (!this.nextCard) this.gameOver();
+            if (this.currentCard.value < this.nextCard.value) {
+                this.position++;
+                this.score++;
+            } else {
+                this.checkScore();
+            }
+        },
+
+        lowerButton() {
+            if (!this.nextCard) this.gameOver();
+            if (this.currentCard.value >= this.nextCard.value) {
+                this.position++;
+                this.score++;
+            } else {
+                this.checkScore();
+            }
+        },
+
+        checkScore() {
+            if (this.lives > 0) {
+                this.lives--;
+                this.position++;
+            } else {
+                this.gameOver();
+            }
+        },
+    },
+};
 </script>
 
-<style scoped></style>
+<style scoped>
+.card {
+    text-align: center;
+}
+</style>
