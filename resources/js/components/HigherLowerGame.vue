@@ -1,25 +1,33 @@
 <template>
     <div>
-        <p>
-            You are playing the game on {{ difficulty.title }} mode ({{
-                difficulty.cards
-            }}
-            cards)
-        </p>
-
-        <p>Score: {{ score }}</p>
-        <p>Lives: {{ lives }}</p>
-        <p>Card Count: {{ position }}</p>
-
-        <button @click="higherButton">higher</button>
-        <p>{{ currentCard }}</p>
-        <button @click="lowerButton">Lower</button>
-        <br />
-
-        <!-- <li v-for="card in playDeck">{{ card.value }} of {{ card.suit }}</li> -->
-        <button class="btn btn-primary" @click="gameOver">
-            Game Over Demo
-        </button>
+        <div class="card">
+            <div class="card-title">
+                <h1>
+                    You are playing the game on {{ difficulty.title }} mode ({{
+                        difficulty.cards
+                    }}
+                    cards)
+                </h1>
+            </div>
+            <div class="card-body">
+                <h4>Card Count: {{ position }}</h4>
+                <h4>Score: {{ score }}</h4>
+                <h4>Lives: {{ lives }}</h4>
+                <button @click="higherButton" class="btn btn-success">
+                    higher
+                </button>
+                <h2>{{ currentCard.value }} of {{ currentCard.suit }}</h2>
+                <button @click="lowerButton" class="btn btn-danger">
+                    Lower
+                </button>
+                <br />
+                <br />
+                <!-- 
+                <button class="btn btn-primary" @click="gameOver">
+                    Game Over Demo
+                </button> -->
+            </div>
+        </div>
     </div>
 </template>
 
@@ -159,4 +167,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.card {
+    text-align: center;
+}
+</style>
