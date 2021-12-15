@@ -16,13 +16,15 @@
                 <button @click="higherButton" class="btn btn-success">
                     higher
                 </button>
-                <h2>{{ currentCard.value }} of {{ currentCard.suit }}</h2>
+
+                <game-card :card="currentCard"></game-card>
+
                 <button @click="lowerButton" class="btn btn-danger">
                     Lower
                 </button>
                 <br />
                 <br />
-                <!-- 
+                <!--
                 <button class="btn btn-primary" @click="gameOver">
                     Game Over Demo
                 </button> -->
@@ -32,8 +34,10 @@
 </template>
 
 <script>
+import GameCard from "./widgets/GameCard";
 export default {
     name: "HigherLowerGame",
+    components: {GameCard},
     props: {
         difficulty: {
             required: true,
