@@ -2,9 +2,16 @@
     <div>
         You are playing the game on {{ difficulty.title }} mode ({{ difficulty.cards }} cards)
 
+        <!-- <li v-for="card in shuffledDeck">
+            {{ card.value }} of {{ card.suit }}
+        </li> -->
+
         <li v-for="card in playDeck">
             {{ card.value }} of {{ card.suit }}
         </li>
+
+        <button @click="shuffleDeckAgain">re-shuffle</button>
+
     </div>
 </template>
 
@@ -88,6 +95,11 @@ export default {
 
         getPlayDeck(deck) {
             return deck.slice(0, this.difficulty.cards);
+        },
+
+        shuffleDeckAgain() {
+            this.shuffledDeck = this.shuffleDeck(this.deck);
+            this.playDeck = this.getPlayDeck(this.shuffledDeck);
         },
 
         gameOver() {

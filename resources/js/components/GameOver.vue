@@ -26,7 +26,7 @@ export default {
         },
         completedMessage() {
             if (this.scoreIsGood) {
-                return "Congratulations you win";
+                return "Congratulations you win - not 9000 but still";
             } else {
                 return "Better luck next time!";
             }
