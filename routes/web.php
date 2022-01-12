@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActorController;
 use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::resource('movies', MovieController::class)->except([
     'update'
 ]);
+
+Route::resource('actors', ActorController::class);
 
 Route::get('/', function () {
     return view('layouts.vue-example');

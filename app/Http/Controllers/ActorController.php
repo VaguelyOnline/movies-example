@@ -47,7 +47,7 @@ class ActorController extends Controller
      */
     public function show(Actor $actor)
     {
-        //
+        return $actor;
     }
 
     /**

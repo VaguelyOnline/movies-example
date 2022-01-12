@@ -1,12 +1,12 @@
 <?php
 
-use App\Models\Movie;
+use App\Models\Actor;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserIdToMoviesTable extends Migration
+class CreateFansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,11 @@ class AddUserIdToMoviesTable extends Migration
      */
     public function up()
     {
-        Schema::table('movies', function (Blueprint $table) {
-            $table->foreignIdFor(User::class)->nullable(); // creator / registrator
+        Schema::create('fans', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(Actor::class);
         });
     }
 
@@ -27,8 +30,6 @@ class AddUserIdToMoviesTable extends Migration
      */
     public function down()
     {
-        Schema::table('movies', function (Blueprint $table) {
-            $table->dropColumn('user_id');
-        });
+        Schema::dropIfExists('fans');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActorController;
+use App\Http\Controllers\FanController;
 use App\Http\Controllers\MovieController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('/movies/{movie}')->group(function () {
-    
+
     Route::put('/', [MovieController::class, 'update'])->name('movies.update');
 
     Route::get('/actors', [MovieController::class, 'getActors'])->name('movies.actors');
@@ -32,3 +33,7 @@ Route::prefix('/movies/{movie}')->group(function () {
 });
 
 Route::get('/actors', [ActorController::class, 'getActors'])->name('actors.search');
+
+// Route::post('/actors/{actor}/fan', [ActorController::class, 'addFan'])->name('actors.fans.store');
+
+Route::middleware('auth:sanctum')->post('/fans', [FanController::class, 'store'])->name('fans.store');
