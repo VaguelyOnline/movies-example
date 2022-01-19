@@ -4,6 +4,8 @@ namespace App\Jobs;
 
 use App\Models\Actor;
 use App\Models\Fan;
+use App\Services\Sms\SmsSender;
+use App\Services\Sms\VoodooSmsSender;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -33,11 +35,13 @@ class NotifyActorOfANewFan implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(SmsSender $sender)
     {
-        Log::info('Notifying: ' . $this->fan->actor->name);
-        Log::info('That they were fanned by: ' . $this->fan->user->name);
-        sleep(3);
-        Log::info('Done');
+        $sender->sendSms($this->fan->actor->mobile, $this->getMessage());
+    }
+
+    private function getMessage()
+    {
+        return "You have are now being followed by " . $this->fan->user->name;
     }
 }

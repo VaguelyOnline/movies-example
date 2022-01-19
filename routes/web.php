@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ActorController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\TinkerController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+if (App::environment('local'))
+{
+    Route::get('tinker', [TinkerController::class, 'tinker']);
+
+    Route::get('phpinfo', [TinkerController::class, 'phpinfo']);
+}
 
 Route::resource('movies', MovieController::class)->except([
     'update'
