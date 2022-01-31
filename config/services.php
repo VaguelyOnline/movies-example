@@ -30,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'sms' => [
+        'api_key_voodoo' => env('VOODOO_API_KEY'),
+        'api_key_global' => env('GLOBAL_API_KEY')
+    ]
+
 ];

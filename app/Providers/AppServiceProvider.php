@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Sms\LoadBalancedFallbackSmsSender;
 use App\Services\Sms\SmsGlobalSender;
 use App\Services\Sms\SmsSender;
 use App\Services\Sms\VoodooSmsSender;
@@ -18,7 +19,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
-        $this->app->bind(SmsSender::class, SmsGlobalSender::class);
+        // $this->app->bind(SmsSender::class, SmsGlobalSender::class);
+        $this->app->bind(SmsSender::class, LoadBalancedFallbackSmsSender::class);
     }
 
     /**
